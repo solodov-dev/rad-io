@@ -1,10 +1,8 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <app-header></app-header>
     <router-view/>
+    <app-player></app-player>
   </div>
 </template>
 
@@ -27,3 +25,16 @@
   }
 }
 </style>
+
+<script>
+
+import Header from './components/Header';
+import Player from './components/Player';
+
+export default {
+  components: {
+    appHeader: Header,
+    appPlayer: Player,
+  }
+}
+</script>
