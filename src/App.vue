@@ -12,18 +12,24 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  min-height: 100vh;
+  background-color: #700750;
 }
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+.navbar {
+    background-color: #ad1052;
   }
-}
+
+  .nav-link {
+    color: #FFAA10;
+  }
+
+  .nav-link:active {
+    color: #fbff00;
+  }
+
+  .view {
+    height: 100%;
+  }
 </style>
 
 <script>

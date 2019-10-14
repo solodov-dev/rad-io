@@ -1,18 +1,18 @@
 <template>
   <nav class="navbar">
-    <a href="#" class="navbar-brand">
+    <router-link to="/" href="#" class="navbar-brand">
       <img src="../assets/logo.svg" alt="Rad.io">
-    </a>
+    </router-link>
       <ul class="nav">
-        <router-link to="/" class="nav-item active">
-          <a href="#" class="nav-link">Home</a>
-        </router-link>
-         <router-link to="/search" class="nav-item">
-          <a href="#" class="nav-link">Search</a>
-         </router-link>
-        <router-link to="#" class="nav-item">
-          <a href="#" class="nav-link">Playlist</a>
-        </router-link>
+        <li class="nav-item">
+          <router-link to="/" class="nav-link">Home</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/search" class="nav-link">Search</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/playlist" class="nav-link">Playlist</router-link>
+        </li>
       </ul>
   </nav>
 </template>
@@ -25,10 +25,8 @@ export default {
 
 <style scoped>
   .navbar {
-    background-color: #ad1052;
-  }
-
-  .nav-link {
-    color: #FFAA10;
+    position: sticky;
+    top: 0;
+    left: 0;
   }
 </style>
