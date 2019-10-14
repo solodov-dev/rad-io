@@ -31,6 +31,7 @@
 
 <script>
 import axios from 'axios';
+import { eventBus } from '../main';
 
 export default {
   data() {
@@ -52,10 +53,14 @@ export default {
             })
           }
         })
-        .catch(error => console.log(error))
+        .catch(error => console.log(error));
     },
     play(station) {
-      console.log(station);
+      axios.get(`http://www.radio-browser.info/webservice/v2/json/url/${station.id}`)
+        .then(res => {
+          eventBus.$emit('playStream', res);
+        })
+        .catch(error => console.log(error));
     }
   }
 }

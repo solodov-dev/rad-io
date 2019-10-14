@@ -1,12 +1,29 @@
 <template>
   <nav class="navbar">
-    <a href="" class="nav-link">Radio Paradise</a>
+    <audio controls :src="stream.url" type="audio/mpeg">
+      Your browser does not support the audio element
+    </audio>
   </nav>
 </template>
 
 <script>
+import { eventBus } from '../main';
+import axios from 'axios';
+
 export default {
-  
+  data() {
+    return {
+      stream: {name: '', url: 'http://0n-jazz.radionetz.de/0n-jazz.mp3'},
+      audioContext: '',
+    }
+  },
+  created() {
+    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    eventBus.$on('playStream', streamData => {
+      this.stream.name = streamData.data.name;
+      this.stream.url = streamData.data.url;
+    });
+  } 
 }
 </script>
 
