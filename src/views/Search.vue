@@ -22,6 +22,7 @@
     </form>
     <div class="list-group">
       <a href="#" v-for="station in stationsList" class="list-group-item list-group-item-action" @click="play(station)">
+        <img class="station-icon" :src="station.icon" alt="">
         {{ station.name }}
       </a>
     </div>
@@ -42,11 +43,19 @@ export default {
   methods: {
     searchStations() {
       axios.get(`http://www.radio-browser.info/webservice/json/stations/${this.searchBy}/${this.searchTerm}`)
-        .then(res => console.log(res))
+        .then(res => {
+          for (let station in res.data) {
+            this.stationsList.push({id: res.data[station].id, 
+                              name: res.data[station].name, 
+                              icon: res.data[station].favicon, 
+                              url: res.data[station].url
+            })
+          }
+        })
         .catch(error => console.log(error))
     },
     play(station) {
-
+      console.log(station);
     }
   }
 }
@@ -61,5 +70,11 @@ export default {
 
 .btn-secondary {
   background-color: #4E92C2;
+}
+
+.station-icon {
+  float: left;
+  height: 50px;
+  width: auto;
 }
 </style>
