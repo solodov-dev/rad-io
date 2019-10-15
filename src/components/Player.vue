@@ -18,7 +18,6 @@ export default {
     }
   },
   created() {
-    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
     eventBus.$on('playStream', streamData => {
       this.stream.name = streamData.data.name;
       this.stream.url = streamData.data.url;
@@ -33,5 +32,6 @@ export default {
     bottom: 0;
     left: 0;
     width: 100%;
+    z-index: 5;
   }
 </style>

@@ -20,8 +20,13 @@
       <label for="radioCountry" class="custom-control-label">by country</label>
     </div>
     </form>
+    <!-- Loading spinner -->
+    <div class="spinner-grow text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <!-- Stations list -->
     <div class="list-group">
-      <a href="#" v-for="station in stationsList" class="list-group-item list-group-item-action" @click="play(station)">
+      <a href="#" v-for="(station, index) in stationsList" :key="index" class="list-group-item list-group-item-action" @click="play(station)">
         <img class="station-icon" :src="station.icon" alt="">
         {{ station.name }}
       </a>
@@ -43,15 +48,42 @@ export default {
   },
   methods: {
     searchStations() {
+      // Show loading spinner
+      let spinner = document.querySelector('.spinner-grow');
+      spinner.style.display = 'inline-flex';
+
+      // Reset lists
+      let dataList = [];
+      this.stationsList = [];
+
+      // Get search results
       axios.get(`http://www.radio-browser.info/webservice/json/stations/${this.searchBy}/${this.searchTerm}`)
         .then(res => {
           for (let station in res.data) {
-            this.stationsList.push({id: res.data[station].id, 
+            dataList.push({id: res.data[station].id, 
                               name: res.data[station].name, 
                               icon: res.data[station].favicon, 
                               url: res.data[station].url
             })
           }
+
+          // Hide loading spinner
+          spinner.style.display = 'none';
+          
+          // If there are results => choose 50 random stations
+          if (dataList.length > 0) {
+            let counter = 0;
+            do {
+              this.stationsList.push(dataList[Math.floor(Math.random()*dataList.length)]);
+              counter++;
+            } while (counter <= 19 && counter <= dataList.length)
+          } else {
+            let error = {
+              name: 'Sorry, nothing found...',
+            }
+            this.stationsList.push(error);
+          }
+          
         })
         .catch(error => console.log(error));
     },
@@ -71,6 +103,7 @@ export default {
   width: 50%;
   margin: auto;
   padding-top: 20px;
+  padding-bottom: 100px;
 }
 
 .btn-secondary {
@@ -81,5 +114,15 @@ export default {
   float: left;
   height: 50px;
   width: auto;
+}
+
+.custom-radio {
+  color: white;
+  margin-top: 5px;
+}
+
+.spinner-grow {
+  margin-top: 100px;
+  display: none;
 }
 </style>
