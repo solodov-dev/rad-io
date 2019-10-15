@@ -113,6 +113,7 @@ export default {
 .station-icon {
   float: left;
   height: 50px;
+  max-width: 100px;
   width: auto;
 }
 

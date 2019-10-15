@@ -1,17 +1,13 @@
 <template>
   <nav class="navbar">
     <router-link to="/" href="#" class="navbar-brand">
-      <img src="../assets/logo.svg" alt="Rad.io">
+      <img src="../assets/logo.svg" alt="Rad.io ">
     </router-link>
       <ul class="nav">
         <li class="nav-item">
-          <router-link to="/" class="nav-link">Home</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/search" class="nav-link">Search</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/playlist" class="nav-link">Playlist</router-link>
+          <router-link to="/search" class="nav-link">
+            <img src="../assets/search.svg" alt="">
+          </router-link>
         </li>
       </ul>
   </nav>

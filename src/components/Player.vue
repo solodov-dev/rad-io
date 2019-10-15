@@ -4,13 +4,16 @@
     <div class="navbar justify-content-center player">
       <div class="player-btn play" :class="{stop: isPlaying}" @click="playStream"></div>
       <span class="station-name">{{ stream.name }}</span>
+      <div class="equalizer-container">
+       <app-equalizer v-show="isPlaying"></app-equalizer>
+      </div>
     </div>
   </nav>
 </template>
 
 <script>
 import { eventBus } from "../main";
-import axios from "axios";
+import Equalizer from "../components/Equalizer"
 
 export default {
   data() {
@@ -40,11 +43,20 @@ export default {
       this.streamLoaded = true;
       this.isPlaying = false;
     });
+  },
+  components: {
+    appEqualizer: Equalizer,
   }
 };
 </script>
 
 <style lang="scss" scoped>
+
+.equalizer-container {
+  width: 50px;
+  height: 40px;  
+}
+
 .navbar {
   position: fixed;
   bottom: 0;
