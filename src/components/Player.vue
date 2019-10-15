@@ -70,7 +70,6 @@ export default {
   height: 40px;
   background-repeat: no-repeat;
   background-size: contain;
-  margin-right: 1em;
   background-image: url("../assets/play-button.svg");
 }
 
@@ -79,6 +78,17 @@ export default {
 }
 
 .station-name {
+  display: inline-block;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 0 2em;
   color: #ffaa10;
+}
+
+@media screen and (max-width: 400px){
+  .station-name {
+    max-width: 150px;
+  }
 }
 </style>

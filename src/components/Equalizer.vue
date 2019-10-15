@@ -14,7 +14,6 @@ export default {
 </script>
 <style scoped>
 .equalizer {
-  margin-left: 1em;
   display: flex;
   justify-content: justify;
   align-items: flex-end;
