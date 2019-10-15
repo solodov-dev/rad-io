@@ -1,23 +1,25 @@
 <template>
   <div class="view">
     <form class="form-group" action="">
+      <!-- Search input -->
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Search" v-model="searchTerm">
         <div class="input-group-append">
           <button class="btn btn-secondary" type="button" @click="searchStations">Search</button>
         </div>
       </div>
+      <!-- Search by radio buttons -->
     <div class="custom-control custom-radio custom-control-inline">
       <input type="radio" name="searchBy" id="radioTag" value="bytag" v-model="searchBy" class="custom-control-input">
-      <label for="radioTag" class="custom-control-label">by tag</label>
+      <label for="radioTag" class="custom-control-label">tag</label>
     </div>
     <div class="custom-control custom-radio custom-control-inline">
       <input type="radio" name="searchBy" id="radioName" value="byname" v-model="searchBy" class="custom-control-input">
-      <label for="radioName" class="custom-control-label">by name</label>
+      <label for="radioName" class="custom-control-label">station</label>
     </div>
     <div class="custom-control custom-radio custom-control-inline">
       <input type="radio" name="searchBy" id="radioCountry" value="bycountry" v-model="searchBy" class="custom-control-input">
-      <label for="radioCountry" class="custom-control-label">by country</label>
+      <label for="radioCountry" class="custom-control-label">country</label>
     </div>
     </form>
     <!-- Loading spinner -->
@@ -99,12 +101,6 @@ export default {
 </script>
 
 <style scoped>
-.view {
-  width: 50%;
-  margin: auto;
-  padding-top: 20px;
-  padding-bottom: 100px;
-}
 
 .btn-secondary {
   background-color: #4E92C2;
@@ -118,12 +114,16 @@ export default {
 }
 
 .custom-radio {
-  color: white;
+  color: #fff;
   margin-top: 5px;
 }
 
 .spinner-grow {
   margin-top: 100px;
   display: none;
+}
+
+.btn-secondary:hover{
+  background-color: #ffaa10;
 }
 </style>

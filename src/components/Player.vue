@@ -4,7 +4,7 @@
     <div class="navbar justify-content-center player">
       <div class="player-btn play" :class="{stop: isPlaying}" @click="playStream"></div>
       <span class="station-name">{{ stream.name }}</span>
-      <div class="equalizer-container">
+      <div v-show="streamLoaded" class="equalizer-container">
        <app-equalizer v-show="isPlaying"></app-equalizer>
       </div>
     </div>
@@ -70,7 +70,7 @@ export default {
   height: 40px;
   background-repeat: no-repeat;
   background-size: contain;
-  margin: 0 1em;
+  margin-right: 1em;
   background-image: url("../assets/play-button.svg");
 }
 
