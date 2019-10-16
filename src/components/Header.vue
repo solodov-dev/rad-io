@@ -9,6 +9,9 @@
             <img src="../assets/search.svg" alt="">
           </router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/login" class="nav-link">Login</router-link>
+        </li>
       </ul>
   </nav>
 </template>
