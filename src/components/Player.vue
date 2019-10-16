@@ -1,9 +1,9 @@
 <template>
   <nav class="navbar">
-    <audio :src="stream.url" type="audio/mpeg">Your browser does not support the audio element</audio>
+    <audio :src="stream.url" type="audio/mpeg" autoplay>Your browser does not support the audio element</audio>
     <div class="navbar justify-content-center player">
       <div class="player-btn play" :class="{stop: isPlaying}" @click="playStream"></div>
-      <span class="station-name">{{ stream.name }}</span>
+      <span class="station-name" v-show="streamLoaded">{{ stream.name }}</span>
       <div v-show="streamLoaded" class="equalizer-container">
        <app-equalizer v-show="isPlaying"></app-equalizer>
       </div>
@@ -37,11 +37,11 @@ export default {
     }
   },
   created() {
-    eventBus.$on("playStream", streamData => {
+    eventBus.$on("chooseStation", streamData => {
       this.stream.name = streamData.data.name;
       this.stream.url = streamData.data.url;
       this.streamLoaded = true;
-      this.isPlaying = false;
+      this.isPlaying = true;
     });
   },
   components: {

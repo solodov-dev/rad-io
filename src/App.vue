@@ -14,6 +14,7 @@
   text-align: center;
   min-height: 100vh;
   background-color: #700750;
+  color: #fff;
 }
 .navbar {
   background-color: #ad1052;
