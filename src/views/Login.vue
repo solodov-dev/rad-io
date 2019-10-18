@@ -9,7 +9,7 @@
         <div class="form-group">
           <input class="form-control" type="password" placeholder="Password" v-model="password">
         </div>
-        <button class="btn btn-primary" @click.prevent="logIn">Sign in</button>
+        <button class="btn btn-primary" @click.prevent="">Sign in</button>
 <p class="help">
   Not a user? <router-link to="/signup">Sign up</router-link>
 </p>
@@ -18,7 +18,6 @@
   </div>
 </template>
 <script>
-import firebase from 'firebase';
 export default {
   data() {
     return {
@@ -26,19 +25,6 @@ export default {
       password: ''
     }
   },
-  methods: {
-    logIn() {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-        .then(
-          function(user) {
-            alert('You are signed in!');
-          },
-          function(err) {
-            alert('Oops..' + err.message)
-          }
-        )
-    }
-  }
 }
 </script>
 <style scoped>

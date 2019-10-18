@@ -16,7 +16,6 @@
   </div>
 </template>
 <script>
-import firebase from "firebase";
 export default {
   data() {
     return {
@@ -24,19 +23,6 @@ export default {
       password: '',
     }
   },
-  methods: {
-    signUp() {
-      firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-        .then(
-          function(user) {
-            alert('Your account has been created!')
-          },
-          function(err) {
-            alert('Oops... ' + err.message)
-          }
-        )
-    }
-  }
 }
 </script>
 <style scoped>
