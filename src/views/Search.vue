@@ -64,79 +64,27 @@
 </template>
 
 <script>
-import axios from "axios";
-import { eventBus } from "../main";
-
 export default {
   data() {
     return {
       searchBy: "bytag",
       searchTerm: "",
-      stationsList: []
-    };
+    }
+  },
+  computed: {
+    stationsList() {
+      return this.$store.getters.stationsList
+    }
   },
   methods: {
-    onSubmit() {
-      this.searchStations();
+    searchStations() {
+      this.$store.dispatch('searchStations', {by: this.searchBy, term: this.searchTerm});
     },
     fallbackImg(evt) {
       evt.currentTarget.src = require("../assets/radio.svg");
     },
-    searchStations() {
-      // Show loading spinner
-      let spinner = document.querySelector(".spinner-grow");
-      spinner.style.display = "inline-flex";
-
-      // Reset lists
-      let dataList = [];
-      this.stationsList = [];
-
-      // Get search results
-      axios
-        .get(
-          `http://www.radio-browser.info/webservice/json/stations/${this.searchBy}/${this.searchTerm}`
-        )
-        .then(res => {
-          for (let station in res.data) {
-            dataList.push({
-              id: res.data[station].id,
-              name: res.data[station].name,
-              icon: res.data[station].favicon,
-              url: res.data[station].url
-            });
-          }
-
-          // Hide loading spinner
-          spinner.style.display = "none";
-
-          // If there are results => choose 50 random stations
-          if (dataList.length > 0) {
-            let counter = 0;
-            do {
-              this.stationsList.push(
-                dataList[Math.floor(Math.random() * dataList.length)]
-              );
-              counter++;
-            } while (counter <= 19 && counter <= dataList.length);
-          } else {
-            let error = {
-              name: "Sorry, nothing found...",
-              icon: require("../assets/radio.svg")
-            };
-            this.stationsList.push(error);
-          }
-        })
-        .catch(error => console.log(error));
-    },
     play(station) {
-      axios
-        .get(
-          `http://www.radio-browser.info/webservice/v2/json/url/${station.id}`
-        )
-        .then(res => {
-          eventBus.$emit("chooseStation", res);
-        })
-        .catch(error => console.log(error));
+      this.$store.dispatch('playStation', station);
     }
   }
 };

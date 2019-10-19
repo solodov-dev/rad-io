@@ -6,11 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 Vue.config.productionTip = false;
 
-
-// Initialize Firebase
-
-export const eventBus = new Vue();
-
 new Vue({
   router,
   store,

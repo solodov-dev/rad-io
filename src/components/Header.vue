@@ -10,8 +10,8 @@
           </router-link>
         </li>
         <li class="nav-item">
-            <router-link v-if="" to="/login" class="nav-link">Login</router-link>
-            <router-link v-else class="nav-link" to="/playlist">
+            <router-link to="/login" class="nav-link">Login</router-link>
+            <router-link class="nav-link" to="/playlist">
               <img src="../assets/playlist.svg" alt="playlist">
             </router-link>
         </li>

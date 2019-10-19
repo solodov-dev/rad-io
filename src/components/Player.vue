@@ -3,8 +3,8 @@
     <audio :src="stream.url" type="audio/mpeg" autoplay>Your browser does not support the audio element</audio>
     <div class="navbar justify-content-center player">
       <div class="player-btn play" :class="{stop: isPlaying}" @click="playStream"></div>
-      <span class="station-name" v-show="streamLoaded">{{ stream.name }}</span>
-      <div v-show="streamLoaded" class="equalizer-container">
+      <span class="station-name" v-show="stream.url">{{ stream.name }}</span>
+      <div v-show="stream.url" class="equalizer-container">
        <app-equalizer v-show="isPlaying"></app-equalizer>
       </div>
     </div>
@@ -12,20 +12,26 @@
 </template>
 
 <script>
-import { eventBus } from "../main";
 import Equalizer from "../components/Equalizer"
 
 export default {
   data() {
     return {
-      stream: { name: "", url: "" },
-      streamLoaded: false,
       isPlaying: false
     };
   },
+  computed: {
+    stream() {
+      if(this.$store.getters.getLink)
+      {
+        this.isPlaying = true;
+      }
+      return this.$store.getters.getLink;
+    }
+  },
   methods: {
     playStream() {
-      if (this.streamLoaded) {
+      if (this.stream.url) {
         let aud = document.querySelector("audio");
         if (this.isPlaying) {
           aud.pause();
@@ -35,14 +41,6 @@ export default {
         this.isPlaying = !this.isPlaying;
       }
     }
-  },
-  created() {
-    eventBus.$on("chooseStation", streamData => {
-      this.stream.name = streamData.data.name;
-      this.stream.url = streamData.data.url;
-      this.streamLoaded = true;
-      this.isPlaying = true;
-    });
   },
   components: {
     appEqualizer: Equalizer,
