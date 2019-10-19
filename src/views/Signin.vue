@@ -1,6 +1,6 @@
 <template>
   <div class="view">
-    <form>
+    <form @submit.prevent="signIn">
       <img class="login-logo" src="../assets/radio.svg" alt="rad.io">
       <h2 class="header">Sign in</h2>
       <div class="form-group">
@@ -9,7 +9,7 @@
         <div class="form-group">
           <input class="form-control" type="password" placeholder="Password" v-model="password">
         </div>
-        <button class="btn btn-primary" @click.prevent="">Sign in</button>
+        <button class="btn btn-primary" type="submit">Sign in</button>
 <p class="help">
   Not a user? <router-link to="/signup">Sign up</router-link>
 </p>
@@ -25,6 +25,11 @@ export default {
       password: ''
     }
   },
+  methods: {
+    signIn() {
+      this.$store.dispatch('signin', {email: this.email, password: this.password})
+    }
+  }
 }
 </script>
 <style scoped>

@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Search from './views/Search.vue';
-import Login from './views/Login.vue';
+import Signin from './views/Signin.vue';
 import Signup from './views/Signup.vue';
 import Playlist from './views/Playlist.vue';
 
@@ -27,9 +27,9 @@ export default new Router({
       component: Search,
     },
     {
-      path: '/login',
-      name: 'login',
-      component: Login,
+      path: '/signin',
+      name: 'signin',
+      component: Signin,
     },
     {
       path: '/signup',

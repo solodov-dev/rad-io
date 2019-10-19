@@ -1,6 +1,6 @@
 <template>
   <div class="view">
-    <form>
+    <form @submit.prevent="signUp">
       <img class="signup-logo" src="../assets/radio.svg" alt="rad.io">
       <h2 class="header">Sign Up</h2>
       <div class="form-group">
@@ -9,7 +9,7 @@
         <div class="form-group">
           <input class="form-control" type="password" placeholder="Password" v-model="password">
         </div>
-        <button class="btn btn-primary" @click.prevent="signUp">Sign Up</button>
+        <button class="btn btn-primary" type="submit">Sign Up</button>
 
 
     </form>
@@ -23,6 +23,11 @@ export default {
       password: '',
     }
   },
+  methods: {
+    signUp() {
+      this.$store.dispatch('signup', {email: this.email, password: this.password});
+    }
+  }
 }
 </script>
 <style scoped>
