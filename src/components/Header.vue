@@ -10,7 +10,7 @@
           </router-link>
         </li>
         <li class="nav-item">
-            <router-link v-if="signedIn" to="/login" class="nav-link">Login</router-link>
+            <router-link v-if="!signedIn" to="/signin" class="nav-link">Login</router-link>
             <router-link v-else class="nav-link" to="/playlist">
               <img src="../assets/playlist.svg" alt="playlist">
             </router-link>

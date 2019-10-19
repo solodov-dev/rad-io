@@ -9,7 +9,7 @@ const state = {
 
 const getters = {
   user(state) {
-    return state.user;
+    return state.userId;
   },
 };
 
@@ -34,7 +34,7 @@ const actions = {
       });
     }).catch(error => console.log(error));
   },
-  login({ commit }, authData) {
+  signin({ commit }, authData) {
     axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${firebaseConfig.apiKey}`, {
       email: authData.email,
       password: authData.password,
