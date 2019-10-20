@@ -5,8 +5,8 @@
     <div class="list-group">
       <a
       href="#/"
-        v-for="(station, index) in playlist"
-        :key="index"
+        v-for="station in playlist"
+        :key="station.id"
         class="list-group-item list-group-item-action"
         @click="play(station)"
       >
@@ -14,9 +14,10 @@
         {{ station.name }}
       </a>
     </div>
-    <a href="#" @click="logOut">Log Out</a>
+    <a href="#" class="logout" @click="logOut">Log Out</a>
   </div>
 </template>
+
 <script>
 export default {
   computed: {
@@ -28,6 +29,18 @@ export default {
     logOut() {
       this.$store.dispatch('logOut');
     },
+    fallbackImg(evt) {
+      evt.currentTarget.src = require("../assets/radio.svg");
+    },
+    play(station) {
+      this.$store.dispatch('playStation', station);
+    },
   }
 }
 </script>
+<style scoped>
+  .logout {
+    color: #fff;
+    margin: 1em;
+  }
+</style>

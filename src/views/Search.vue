@@ -95,13 +95,6 @@ export default {
   background-color: #4e92c2;
 }
 
-.station-icon {
-  float: left;
-  height: 50px;
-  max-width: 100px;
-  width: auto;
-}
-
 .custom-radio {
   color: #fff;
   margin-top: 5px;

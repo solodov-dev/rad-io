@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar">
     <router-link to="/" href="#" class="navbar-brand">
-      <img src="../assets/logo.svg" alt="Rad.io ">
-      <app-equalizer v-show="isPlaying"></app-equalizer>
+      <app-equalizer class="equalizer"></app-equalizer>
+      <img class="logo" src="../assets/logo.svg" alt="Rad.io ">
     </router-link>
       <ul class="nav">
         <li class="nav-item">
@@ -11,7 +11,7 @@
           </router-link>
         </li>
         <li class="nav-item">
-            <router-link v-if="!signedIn" to="/signin" class="nav-link">Login</router-link>
+            <router-link v-if="!loggedIn" to="/signin" class="nav-link">Login</router-link>
             <router-link v-else class="nav-link" to="/playlist">
               <img src="../assets/playlist.svg" alt="playlist">
             </router-link>
@@ -25,12 +25,12 @@ import Equalizer from "../components/Equalizer";
 
 export default {
   computed: {
-    signedIn() {
+    loggedIn() {
       return this.$store.getters.loggedIn;
     },
-    isPlaying() {
-      return 
-    },
+  },
+  components: {
+    appEqualizer: Equalizer,
   }
 }
 </script>
@@ -41,5 +41,13 @@ export default {
     top: 0;
     left: 0;
     z-index: 5;
+  }
+
+  .logo {
+    margin-right: 10px;
+  }
+
+  .equalizer {
+    float: left;
   }
 </style>

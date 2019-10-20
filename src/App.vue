@@ -64,6 +64,13 @@ export default {
   height: 100%;
 }
 
+.station-icon {
+  float: left;
+  height: 50px;
+  max-width: 100px;
+  width: auto;
+}
+
 @media screen and (min-width: 900px) {
   .view {
     width: 50%;

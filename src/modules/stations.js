@@ -2,28 +2,38 @@
 import axios from 'axios';
 
 const state = {
-  playLink: '',
+  stream: '',
   stationsList: [],
+  isPlaying: false,
 };
 
 const getters = {
-  getLink(state) {
-    return state.playLink;
+  stream(state) {
+    return state.stream;
   },
   stationsList(state) {
     return state.stationsList;
   },
+  isPlaying(state) {
+    return state.isPlaying;
+  },
 };
 
 const mutations = {
-  updateLink(state, link) {
-    state.playLink = link;
+  updateStream(state, streamData) {
+    state.stream = streamData;
   },
   pushStation(state, station) {
     state.stationsList.push(station);
   },
   clearStationsList(state) {
     state.stationsList = [];
+  },
+  togglePlaying(state) {
+    state.isPlaying = !state.isPlaying;
+  },
+  play(state) {
+    state.isPlaying = true;
   },
 };
 
@@ -36,12 +46,12 @@ const actions = {
       )
       .then((res) => {
         const dataList = [];
-        for (let station in res.data) {
+        for (const station in res.data) {
           dataList.push({
             id: res.data[station].id,
             name: res.data[station].name,
             icon: res.data[station].favicon,
-            url: res.data[station].url
+            url: res.data[station].url,
           });
         }
 
@@ -70,7 +80,11 @@ const actions = {
       .get(
         `http://www.radio-browser.info/webservice/v2/json/url/${station.id}`,
       )
-      .then(res => commit('updateLink', res.data))
+      .then((res) => {
+        res.data.icon = station.icon;
+        commit('updateStream', res.data);
+        commit('play');
+      })
       .catch(error => console.log(error));
   },
 };

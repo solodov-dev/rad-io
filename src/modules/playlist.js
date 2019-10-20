@@ -31,7 +31,6 @@ const actions = {
     db.collection('users').doc(uid).get()
       .then((doc) => {
         if (doc.exists) {
-          console.log(doc.data().playlist);
           commit('setPlaylist', doc.data().playlist);
         } else {
           console.log('No such document');
