@@ -1,51 +1,53 @@
 /* eslint no-shadow: ["error", { "allow": ["state"] }] */
-import axios from 'axios';
-import firebaseConfig from './firebase-config';
+import { firebase, db } from '@/modules/firebase-config';
 
 const state = {
-  idToken: null,
-  userId: null,
+  user: {},
+  loggedIn: false,
 };
 
 const getters = {
   user(state) {
-    return state.userId;
+    return state.user;
+  },
+  loggedIn(state) {
+    return state.loggedIn;
   },
 };
 
 const mutations = {
-  authUser(state, userData) {
-    state.idToken = userData.token;
-    state.userId = userData.userId;
+  loguserin(state) {
+    state.loggedIn = true;
+  },
+  loguserout(state) {
+    state.loggedIn = false;
+  },
+  setuser(state, userData) {
+    state.user = userData;
   },
 };
 
 const actions = {
   signup({ commit }, authData) {
-    axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${firebaseConfig.apiKey}`, {
-      email: authData.email,
-      password: authData.password,
-      returnSecureToken: true,
-    }).then((res) => {
-      console.log(res);
-      commit('authUser', {
-        token: res.data.idToken,
-        userId: res.data.localId,
-      });
-    }).catch(error => console.log(error));
+    firebase.auth().createUserWithEmailAndPassword(authData.email, authData.password)
+      .then((res) => {
+        db.collection('users').doc(`${res.user.uid}`).set({ playlist: [] });
+      })
+      .catch(error => console.log(error));
   },
   signin({ commit }, authData) {
-    axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${firebaseConfig.apiKey}`, {
-      email: authData.email,
-      password: authData.password,
-      returnSecureToken: true,
-    }).then((res) => {
-      console.log(res);
-      commit('authUser', {
-        token: res.data.idToken,
-        userId: res.data.localId,
-      });
-    }).catch(error => console.log(error));
+    firebase.auth().signInWithEmailAndPassword(authData.email, authData.password)
+      .then(res => console.log(res))
+      .catch(error => console.log(error));
+  },
+  logout({ commit }) {
+    firebase.auth().signOut()
+      .then(res => console.log(res))
+      .catch(error => console.log(error));
+  },
+  getuser({ commit }) {
+    const user = firebase.auth().currentUser;
+    commit('setuser', user);
   },
 };
 

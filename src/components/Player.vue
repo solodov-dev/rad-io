@@ -7,6 +7,7 @@
       <div v-show="stream.url" class="equalizer-container">
        <app-equalizer v-show="isPlaying"></app-equalizer>
       </div>
+      <a href="#" @click="addToPlaylist">Add</a>
     </div>
   </nav>
 </template>
@@ -40,6 +41,9 @@ export default {
         }
         this.isPlaying = !this.isPlaying;
       }
+    },
+    addToPlaylist() {
+      this.$store.dispatch('addToPlaylist', this.stream);
     }
   },
   components: {

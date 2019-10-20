@@ -6,6 +6,36 @@
   </div>
 </template>
 
+<script>
+import Header from "./components/Header";
+import Player from "./components/Player";
+import { firebase } from './modules/firebase-config';
+import router from './router'
+
+export default {
+  components: {
+    appHeader: Header,
+    appPlayer: Player
+  },
+  created() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+        this.$store.commit('loguserin');
+        console.log('You are logged in!');
+        this.$store.dispatch('updatePlaylist');
+        router.replace('/playlist');
+      } else {
+        this.$store.commit('loguserout');
+        console.log('You are logged out!');
+        this.$store.commit('emptyLocalPlaylist');
+        router.replace('/search');
+      }
+    })
+  }
+};
+</script>
+
+
 <style lang="scss">
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -42,15 +72,3 @@
   }
 }
 </style>
-
-<script>
-import Header from "./components/Header";
-import Player from "./components/Player";
-
-export default {
-  components: {
-    appHeader: Header,
-    appPlayer: Player
-  }
-};
-</script>

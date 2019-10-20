@@ -24,7 +24,7 @@
 export default {
   computed: {
     signedIn() {
-      return (this.$store.getters.user ? true : false);
+      return this.$store.getters.loggedIn;
     }
   }
 }
