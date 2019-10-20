@@ -20,14 +20,12 @@ export default {
   created() {
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
-        this.$store.commit('loguserin');
-        console.log('You are logged in!');
-        this.$store.dispatch('updatePlaylist');
+        this.$store.commit('logUserIn', user.uid);
+        this.$store.dispatch('loadPlaylist', user.uid);
         router.replace('/playlist');
       } else {
-        this.$store.commit('loguserout');
-        console.log('You are logged out!');
-        this.$store.commit('emptyLocalPlaylist');
+        this.$store.commit('logUserOut');
+        this.$store.commit('unloadPlaylist');
         router.replace('/search');
       }
     })

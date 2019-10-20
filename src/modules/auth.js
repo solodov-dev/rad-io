@@ -2,7 +2,7 @@
 import { firebase, db } from '@/modules/firebase-config';
 
 const state = {
-  user: {},
+  user: '',
   loggedIn: false,
 };
 
@@ -16,38 +16,37 @@ const getters = {
 };
 
 const mutations = {
-  loguserin(state) {
+  logUserIn(state, uid) {
     state.loggedIn = true;
+    state.user = uid;
   },
-  loguserout(state) {
+  logUserOut(state) {
     state.loggedIn = false;
-  },
-  setuser(state, userData) {
-    state.user = userData;
+    state.user = '';
   },
 };
 
 const actions = {
-  signup({ commit }, authData) {
+  signUp({ commit }, authData) {
     firebase.auth().createUserWithEmailAndPassword(authData.email, authData.password)
       .then((res) => {
         db.collection('users').doc(`${res.user.uid}`).set({ playlist: [] });
       })
       .catch(error => console.log(error));
   },
-  signin({ commit }, authData) {
+  signIn({ commit }, authData) {
     firebase.auth().signInWithEmailAndPassword(authData.email, authData.password)
-      .then(res => console.log(res))
+      .then((res) => {
+        console.log('OK');
+      })
       .catch(error => console.log(error));
   },
-  logout({ commit }) {
+  logOut({ commit }) {
     firebase.auth().signOut()
-      .then(res => console.log(res))
+      .then((res) => {
+        console.log('OK');
+      })
       .catch(error => console.log(error));
-  },
-  getuser({ commit }) {
-    const user = firebase.auth().currentUser;
-    commit('setuser', user);
   },
 };
 

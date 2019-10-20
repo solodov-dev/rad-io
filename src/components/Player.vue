@@ -4,16 +4,15 @@
     <div class="navbar justify-content-center player">
       <div class="player-btn play" :class="{stop: isPlaying}" @click="playStream"></div>
       <span class="station-name" v-show="stream.url">{{ stream.name }}</span>
-      <div v-show="stream.url" class="equalizer-container">
-       <app-equalizer v-show="isPlaying"></app-equalizer>
-      </div>
+      
       <a href="#" @click="addToPlaylist">Add</a>
     </div>
   </nav>
 </template>
 
 <script>
-import Equalizer from "../components/Equalizer"
+
+import { db } from '@/modules/firebase-config'
 
 export default {
   data() {
@@ -44,6 +43,7 @@ export default {
     },
     addToPlaylist() {
       this.$store.dispatch('addToPlaylist', this.stream);
+      db.collection('users').doc(this.$store.getters.user).set({playlist: this.$store.getters.playlist});
     }
   },
   components: {

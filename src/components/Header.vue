@@ -2,6 +2,7 @@
   <nav class="navbar">
     <router-link to="/" href="#" class="navbar-brand">
       <img src="../assets/logo.svg" alt="Rad.io ">
+      <app-equalizer v-show="isPlaying"></app-equalizer>
     </router-link>
       <ul class="nav">
         <li class="nav-item">
@@ -20,12 +21,16 @@
 </template>
 
 <script>
+import Equalizer from "../components/Equalizer";
 
 export default {
   computed: {
     signedIn() {
       return this.$store.getters.loggedIn;
-    }
+    },
+    isPlaying() {
+      return 
+    },
   }
 }
 </script>

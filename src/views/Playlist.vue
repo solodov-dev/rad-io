@@ -21,12 +21,12 @@
 export default {
   computed: {
     playlist() {
-      return this.$store.getters.localplaylist;
+      return this.$store.getters.playlist;
     }
   },
   methods: {
     logOut() {
-      this.$store.dispatch('logout');
+      this.$store.dispatch('logOut');
     },
   }
 }

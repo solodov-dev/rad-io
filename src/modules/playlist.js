@@ -6,7 +6,7 @@ const state = {
 };
 
 const getters = {
-  localplaylist(state) {
+  playlist(state) {
     return state.localPlaylist;
   },
 };
@@ -15,29 +15,29 @@ const mutations = {
   playlistPush(state, station) {
     state.localPlaylist.push(station);
   },
-  emptyLocalPlaylist(state) {
+  unloadPlaylist(state) {
     state.localPlaylist = [];
+  },
+  setPlaylist(state, playlist) {
+    state.localPlaylist = playlist;
   },
 };
 
 const actions = {
   addToPlaylist({ commit }, station) {
     commit('playlistPush', station);
-    db.collection('db').add({
-      id: station.id,
-      name: station.name,
-      url: station.url,
-    }).then((docRef) => {
-      console.log(`Document is written${docRef}`);
-    }).catch(error => console.log(error));
   },
-  updatePlaylist({ commit }) {
-    db.collection('db').get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          commit('playlistPush', doc.data);
-        });
-      }).catch(error => console.log(error));
+  loadPlaylist({ commit }, uid) {
+    db.collection('users').doc(uid).get()
+      .then((doc) => {
+        if (doc.exists) {
+          console.log(doc.data().playlist);
+          commit('setPlaylist', doc.data().playlist);
+        } else {
+          console.log('No such document');
+        }
+      })
+      .catch(error => console.log(error));
   },
 };
 
