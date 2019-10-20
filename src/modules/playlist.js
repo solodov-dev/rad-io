@@ -21,11 +21,17 @@ const mutations = {
   setPlaylist(state, playlist) {
     state.localPlaylist = playlist;
   },
+  playlistFilter(state, id) {
+    state.localPlaylist = state.localPlaylist.filter(station => station.id !== id);
+  },
 };
 
 const actions = {
   addToPlaylist({ commit }, station) {
     commit('playlistPush', station);
+  },
+  removeFromPlaylist({ commit }, station) {
+    commit('playlistFilter', station.id);
   },
   loadPlaylist({ commit }, uid) {
     db.collection('users').doc(uid).get()
