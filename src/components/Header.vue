@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar">
-    <router-link to="/" href="#" class="navbar-brand">
+    <router-link to="/"   class="navbar-brand">
       <app-equalizer class="equalizer"></app-equalizer>
       <img class="logo" src="../assets/logo.svg" alt="Rad.io ">
     </router-link>

@@ -50,7 +50,7 @@
     <!-- Stations list -->
     <div class="list-group">
       <a
-      href="#/"
+      href="#"
         v-for="(station, index) in stationsList"
         :key="index"
         class="list-group-item list-group-item-action"
