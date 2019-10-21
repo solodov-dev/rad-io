@@ -71,6 +71,10 @@ export default {
   width: auto;
 }
 
+.list-group-item {
+  cursor: pointer;
+}
+
 @media screen and (min-width: 900px) {
   .view {
     width: 50%;

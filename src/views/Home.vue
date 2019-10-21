@@ -1,5 +1,6 @@
 <template>
   <div class="view">
+    <!-- My app description -->
       <div class="view-page-container">
         <div class="view-page">
           <h4>Online radio streaming</h4>
@@ -8,6 +9,16 @@
           <router-link to="/search" class="btn btn-primary">Listen now</router-link>
         </div>
       </div>
+       <!-- Radio search directory -->
+    <div class="view-page-container">
+        <div class="view-page">
+          <h4>Choose from 25200 stations</h4>
+          <img class="search" src="../assets/search.svg" alt="Radio Search">
+          <p>A community with the aim of collecting as many internet radio and TV stations as possible. </p>
+          <a href="https://www.radio-browser.info" class="btn btn-primary">Radio browser</a>
+        </div>
+      </div>
+      <!-- Vue.js -->
       <div class="view-page-container">
         <div class="view-page">
           <h4>Built with Vue.js</h4>
@@ -16,12 +27,15 @@
           <a href="https://vuejs.org" class="btn btn-primary">Learn more</a>
         </div>
       </div>
-    <div class="view-page-container">
+     
+      <!-- Firebase -->
+      <div class="view-page-container">
         <div class="view-page">
-          <h4>Choose from 25200 stations</h4>
-          <img class="search" src="../assets/search.svg" alt="Vue">
-          <p>A community with the aim of collecting as many internet radio and TV stations as possible. </p>
-          <a href="https://www.radio-browser.info" class="btn btn-primary">Radio browser</a>
+          <h4>Built with Firebase</h4>
+          <img class="search" src="../assets/firebase-logo.svg" alt="Firebase logo">
+          <p>Build apps fast, without managing infrastructure. Firebase gives you functionality like analytics, 
+            databases, messaging and more.</p>
+          <a href="https://www.firebase.google.com" class="btn btn-primary">Firebase</a>
         </div>
       </div>
   </div>

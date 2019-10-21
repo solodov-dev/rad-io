@@ -18,16 +18,21 @@
   </div>
 </template>
 <script>
+import { firebase } from '../modules/firebase-config';
 export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
     }
   },
   methods: {
     signIn() {
-      this.$store.dispatch('signIn', {email: this.email, password: this.password})
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      .then((res) => {
+        console.log('OK');
+      })
+      .catch(error => console.log(error));
     }
   }
 }

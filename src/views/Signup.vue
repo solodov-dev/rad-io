@@ -10,12 +10,12 @@
           <input class="form-control" type="password" placeholder="Password" v-model="password">
         </div>
         <button class="btn btn-primary" type="submit">Sign Up</button>
-
-
     </form>
   </div>
 </template>
 <script>
+import { firebase, db } from '../modules/firebase-config';
+
 export default {
   data() {
     return {
@@ -25,7 +25,11 @@ export default {
   },
   methods: {
     signUp() {
-      this.$store.dispatch('signUp', {email: this.email, password: this.password});
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+      .then((res) => {
+        db.collection('users').doc(`${res.user.uid}`).set({ playlist: [] });
+      })
+      .catch(error => console.log(error));
     }
   }
 }

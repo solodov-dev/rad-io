@@ -1,12 +1,16 @@
 <template>
   <nav class="navbar">
+    <!-- Audio source -->
     <audio :src="stream.url" type="audio/mpeg" autoplay>Your browser does not support the audio element</audio>
     <div class="navbar justify-content-center player">
+      <!-- Play / Stop button -->
       <div class="player-btn play" :class="{stop: isPlaying}" @click="playStream"></div>
+      <!-- Track name -->
       <span class="station-name" v-show="stream.url">{{ stream.name }}</span>
+      <!-- Bookmark strack -->
       <a v-if="stream && loggedIn" @click="updatePlaylist">
         <svg width="30" height="30" viewBox="0 0 91 86" class="star" :class="{bookmarked: isBookmarked}" xmlns="http://www.w3.org/2000/svg">
-          <path d="M45.5 3.23607L55.2134 33.1307L55.4379 33.8217H56.1644H87.5975L62.1676 52.2976L61.5798 52.7246L61.8043 53.4156L71.5177 83.3103L46.0878 64.8344L45.5 64.4073L44.9122 64.8344L19.4823 83.3103L29.1957 53.4156L29.4202 52.7246L28.8324 52.2976L3.4025 33.8217H34.8356H35.5621L35.7866 33.1307L45.5 3.23607Z" fill="none" stroke="#FFAA10" stroke-width="4"/>
+          <path d="M45.5 3.23607L55.2134 33.1307L55.4379 33.8217H56.1644H87.5975L62.1676 52.2976L61.5798 52.7246L61.8043 53.4156L71.5177 83.3103L46.0878 64.8344L45.5 64.4073L44.9122 64.8344L19.4823 83.3103L29.1957 53.4156L29.4202 52.7246L28.8324 52.2976L3.4025 33.8217H34.8356H35.5621L35.7866 33.1307L45.5 3.23607Z" fill="#700750"/>
         </svg>
       </a>
     </div>

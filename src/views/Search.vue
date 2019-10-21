@@ -44,21 +44,22 @@
       </div>
     </form>
     <!-- Loading spinner -->
-    <div class="spinner-grow text-primary" role="status">
+    <div v-if="searching" class="spinner-grow text-primary" role="status">
       <span class="sr-only">Loading...</span>
     </div>
     <!-- Stations list -->
     <div class="list-group">
-      <a
-      href="#"
+      <div
         v-for="(station, index) in stationsList"
         :key="index"
         class="list-group-item list-group-item-action"
         @click="play(station)"
       >
+      <!-- Station icon -->
         <img class="station-icon" :src="station.icon" @error="fallbackImg" alt="Radiostation image" />
+      <!-- Station name -->
         {{ station.name }}
-      </a>
+      </div>
     </div>
   </div>
 </template>
@@ -73,12 +74,15 @@ export default {
   },
   computed: {
     stationsList() {
-      return this.$store.getters.stationsList
-    }
+      return this.$store.getters.stationsList;
+    },
+    searching() {
+      return this.$store.getters.searching;
+    },
   },
   methods: {
     searchStations() {
-      this.$store.dispatch('searchStations', {by: this.searchBy, term: this.searchTerm});
+      this.$store.dispatch('searchStations', {by: this.searchBy, term: this.searchTerm})
     },
     fallbackImg(evt) {
       evt.currentTarget.src = require("../assets/radio.svg");
@@ -102,7 +106,6 @@ export default {
 
 .spinner-grow {
   margin-top: 100px;
-  display: none;
 }
 
 .btn-secondary:hover {

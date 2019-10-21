@@ -1,4 +1,5 @@
 <template>
+<!-- Bar equalizer animation -->
   <div class="equalizer">
   <div class="column column1" :class="{play: isPlaying}"></div>
   <div class="column column2" :class="{play: isPlaying}"></div>

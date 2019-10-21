@@ -1,5 +1,5 @@
 /* eslint no-shadow: ["error", { "allow": ["state"] }] */
-import { firebase, db } from '@/modules/firebase-config';
+// Save user Auth state
 
 const state = {
   user: '',
@@ -26,33 +26,8 @@ const mutations = {
   },
 };
 
-const actions = {
-  signUp({ commit }, authData) {
-    firebase.auth().createUserWithEmailAndPassword(authData.email, authData.password)
-      .then((res) => {
-        db.collection('users').doc(`${res.user.uid}`).set({ playlist: [] });
-      })
-      .catch(error => console.log(error));
-  },
-  signIn({ commit }, authData) {
-    firebase.auth().signInWithEmailAndPassword(authData.email, authData.password)
-      .then((res) => {
-        console.log('OK');
-      })
-      .catch(error => console.log(error));
-  },
-  logOut({ commit }) {
-    firebase.auth().signOut()
-      .then((res) => {
-        console.log('OK');
-      })
-      .catch(error => console.log(error));
-  },
-};
-
 export default {
   state,
   getters,
   mutations,
-  actions,
 };

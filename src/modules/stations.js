@@ -5,6 +5,7 @@ const state = {
   stream: '',
   stationsList: [],
   isPlaying: false,
+  searching: false,
 };
 
 const getters = {
@@ -16,6 +17,9 @@ const getters = {
   },
   isPlaying(state) {
     return state.isPlaying;
+  },
+  searching(state) {
+    return state.searching;
   },
 };
 
@@ -35,11 +39,15 @@ const mutations = {
   play(state) {
     state.isPlaying = true;
   },
+  toggleSearching(state, searchState) {
+    state.searching = searchState;
+  },
 };
 
 const actions = {
   searchStations({ commit }, search) {
     commit('clearStationsList');
+    commit('toggleSearching', true);
     axios
       .get(
         `http://www.radio-browser.info/webservice/json/stations/${search.by}/${search.term}`,
@@ -70,8 +78,10 @@ const actions = {
             name: 'Sorry, nothing found...',
             icon: require('@/assets/radio.svg'),
           };
-          this.stationsList.push(error);
+          commit('pushStation', error);
         }
+
+        commit('toggleSearching', false);
       })
       .catch(error => console.log(error));
   },
