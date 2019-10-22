@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { firebase } from '../modules/firebase-config';
+import { firebase } from '../modules/firebase-init';
 
 export default {
   computed: {
@@ -67,5 +67,9 @@ export default {
 
   .star:hover path {
     fill: #ad1052;
+  }
+
+  .list-group {
+    margin: 1em auto;
   }
 </style>

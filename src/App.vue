@@ -9,7 +9,7 @@
 <script>
 import Header from "./components/Header";
 import Player from "./components/Player";
-import { firebase } from './modules/firebase-config';
+import { firebase } from './modules/firebase-init';
 import router from './router'
 
 export default {

@@ -1,5 +1,5 @@
 /* eslint no-shadow: ["error", { "allow": ["state"] }] */
-import { db } from '@/modules/firebase-config';
+import { db } from '@/modules/firebase-init';
 
 const state = {
   localPlaylist: [],

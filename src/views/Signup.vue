@@ -14,7 +14,7 @@
   </div>
 </template>
 <script>
-import { firebase, db } from '../modules/firebase-config';
+import { firebase, db } from '../modules/firebase-init';
 
 export default {
   data() {

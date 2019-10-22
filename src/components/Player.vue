@@ -19,7 +19,7 @@
 
 <script>
 
-import { db } from '@/modules/firebase-config'
+import { db } from '@/modules/firebase-init'
 
 export default {
   computed: {
@@ -107,7 +107,7 @@ export default {
 }
 
 .bookmarked:hover path {
-  fill: #ad1052;
+  fill: #700750;
 }
 
 @media screen and (max-width: 400px){
