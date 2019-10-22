@@ -4,21 +4,45 @@
       <img class="signup-logo" src="../assets/radio.svg" alt="rad.io" />
       <h2 class="header">Sign Up</h2>
       <div class="form-group">
-        <input class="form-control" :class="emailValidation" type="email" placeholder="Email" v-model="email" @input="$v.email.$touch()"/>
+        <input
+          class="form-control"
+          :class="{'is-invalid': $v.email.$error}"
+          type="email"
+          placeholder="Email"
+          v-model="email"
+          @blur="$v.email.$touch()"
+        />
       </div>
       <div class="form-group">
-        <input class="form-control" type="password" placeholder="Password" v-model="password" />
+        <input
+          class="form-control"
+          :class="{'is-invalid': $v.password.$error}"
+          type="password"
+          placeholder="Password"
+          v-model="password"
+          @blur="$v.password.$touch()"
+        />
       </div>
       <div class="form-group">
-        <input class="form-control" type="password" placeholder="Confirm Password" v-model="confirmPassword" />
+        <input
+          class="form-control"
+          :class="{'is-invalid': $v.confirmPassword.$error}"
+          type="password"
+          placeholder="Confirm Password"
+          v-model="confirmPassword"
+          @blur="$v.confirmPassword.$touch()"
+        />
       </div>
-      <button class="btn btn-primary" type="submit">Sign Up</button>
+      <div v-if="errorMsg" class="alert alert-danger" role="alert">
+        {{ errorMsg }}
+      </div>
+      <button class="btn btn-primary" :disabled="$v.$invalid" type="submit">Sign Up</button>
     </form>
   </div>
 </template>
 <script>
 import { firebase, db } from "../modules/firebase-init";
-import { required, email } from 'vuelidate/lib/validators';
+import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 
 export default {
   data() {
@@ -26,21 +50,21 @@ export default {
       email: "",
       password: "",
       confirmPassword: "",
+      errorMsg: '',
     };
-  },
-  computed: {
-    emailValidation() {
-      return {
-        'is-valid': !this.$v.email.$error && this.email,
-        'is-invalid': this.$v.email.$error,
-      }
-    }
   },
   validations: {
     email: {
       required,
       email,
-    }
+    },
+    password: {
+      required,
+      minLen: minLength(6)
+    },
+    confirmPassword: {
+      sameAs: sameAs('password'),
+    },
   },
   methods: {
     signUp() {
@@ -52,7 +76,7 @@ export default {
             .doc(`${res.user.uid}`)
             .set({ playlist: [] });
         })
-        .catch(error => console.log(error));
+        .catch(error => this.errorMsg = error.message);
     }
   }
 };
