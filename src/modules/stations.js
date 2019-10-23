@@ -50,7 +50,7 @@ const actions = {
     commit('toggleSearching', true);
     axios
       .get(
-        `http://www.radio-browser.info/webservice/json/stations/${search.by}/${search.term}`,
+        `https://www.radio-browser.info/webservice/json/stations/${search.by}/${search.term}`,
       )
       .then((res) => {
         const dataList = [];
@@ -88,7 +88,7 @@ const actions = {
   playStation({ commit }, station) {
     axios
       .get(
-        `http://www.radio-browser.info/webservice/v2/json/url/${station.id}`,
+        `https://www.radio-browser.info/webservice/v2/json/url/${station.id}`,
       )
       .then((res) => {
         // Destructure res to include only needed fields
