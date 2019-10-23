@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { firebase } from '../modules/firebase-init';
+import { firebase, db } from '../modules/firebase-init';
 
 export default {
   computed: {
@@ -48,6 +48,7 @@ export default {
     },
     removeFromPlaylist(station) {
       this.$store.dispatch('removeFromPlaylist', station);
+      db.collection('users').doc(this.$store.getters.user).set({playlist: this.$store.getters.playlist});
     }
   }
 }
