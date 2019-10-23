@@ -64,6 +64,10 @@ export default {
   height: 100%;
 }
 
+.view-form {
+  padding-bottom: 0;
+}
+
 .radio-logo {
   height: 80px;
   width: auto;

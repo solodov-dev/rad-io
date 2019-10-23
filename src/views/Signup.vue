@@ -13,6 +13,9 @@
           @blur="$v.email.$touch()"
         />
       </div>
+      <div v-if="$v.email.$error" class="alert alert-danger" role="alert">
+        Enter valid email adress
+      </div>
       <div class="form-group">
         <input
           class="form-control"
@@ -23,6 +26,9 @@
           @blur="$v.password.$touch()"
         />
       </div>
+      <div v-if="$v.password.$error" class="alert alert-danger" role="alert">
+        Password should be minimum 6 characters long
+      </div>
       <div class="form-group">
         <input
           class="form-control"
@@ -32,6 +38,9 @@
           v-model="confirmPassword"
           @blur="$v.confirmPassword.$touch()"
         />
+      </div>
+      <div v-if="$v.confirmPassword.$error" class="alert alert-danger" role="alert">
+        Passwords don't match
       </div>
       <div v-if="errorMsg" class="alert alert-danger" role="alert">
         {{ errorMsg }}
@@ -84,6 +93,6 @@ export default {
 <style scoped>
 
 .header {
-  margin: 1em;
+  margin: .6em;
 }
 </style>
