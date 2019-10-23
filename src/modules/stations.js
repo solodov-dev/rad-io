@@ -28,7 +28,7 @@ const mutations = {
     state.stream = streamData;
   },
   pushStation(state, station) {
-    state.stationsList.push({ id: station.id, name: station.name, icon: station.favicon });
+    state.stationsList.push({ id: station.id, name: station.name, icon: station.favicon.replace('http:', 'https:') });
   },
   clearStationsList(state) {
     state.stationsList = [];
