@@ -28,7 +28,7 @@ const mutations = {
     state.stream = streamData;
   },
   pushStation(state, station) {
-    state.stationsList.push(station);
+    state.stationsList.push({ id: station.id, name: station.name, icon: station.favicon });
   },
   clearStationsList(state) {
     state.stationsList = [];
@@ -53,26 +53,17 @@ const actions = {
         `https://www.radio-browser.info/webservice/json/stations/${search.by}/${search.term}`,
       )
       .then((res) => {
-        const dataList = [];
-        for (const station in res.data) {
-          dataList.push({
-            id: res.data[station].id,
-            name: res.data[station].name,
-            icon: res.data[station].favicon,
-            url: res.data[station].url,
-          });
-        }
-
-        // If there are results => choose 50 random stations
-        if (dataList.length > 0) {
-          let counter = 0;
-          do {
-            commit(
-              'pushStation',
-              dataList[Math.floor(Math.random() * dataList.length)],
-            );
-            counter += 1;
-          } while (counter <= 19 && counter <= dataList.length);
+        const dataList = Object.values(res.data);
+        // If there are more than 20 stations => choose 20 random stations
+        if (dataList.length > 20) {
+          for (let i = 0; i < 20; i += 1) {
+            commit('pushStation', dataList[Math.floor(Math.random() * dataList.length)]);
+          }
+        // If more than 0 but less than 20 => just returh the datalist
+        } else if (dataList.length > 0) {
+          for (let i = 0; i < dataList.length; i += 1) {
+            commit('pushStation', dataList[i]);
+          }
         } else {
           const error = {
             name: 'Sorry, nothing found...',
