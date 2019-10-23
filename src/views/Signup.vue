@@ -1,7 +1,7 @@
 <template>
-  <div class="view">
-    <form @submit.prevent="signUp">
-      <img class="signup-logo" src="../assets/radio.svg" alt="rad.io" />
+  <div class="view-form">
+    <form @submit.prevent="signUp" @focusin="errorMsg=''">
+      <img class="radio-logo" src="../assets/radio.svg" alt="rad.io" />
       <h2 class="header">Sign Up</h2>
       <div class="form-group">
         <input
@@ -82,15 +82,6 @@ export default {
 };
 </script>
 <style scoped>
-.view {
-  width: 25%;
-}
-
-.signup-logo {
-  height: 80px;
-  width: auto;
-  margin: 1em;
-}
 
 .header {
   margin: 1em;

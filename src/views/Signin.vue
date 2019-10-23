@@ -1,7 +1,7 @@
 <template>
-  <div class="view">
-    <form @submit.prevent="signIn">
-      <img class="login-logo" src="../assets/radio.svg" alt="rad.io" />
+  <div class="view-form">
+    <form @submit.prevent="signIn" @focusin="errorMsg = ''">
+      <img class="radio-logo" src="../assets/radio.svg" alt="rad.io" />
       <h2 class="header">Sign in</h2>
       <div class="form-group">
         <input class="form-control" type="email" placeholder="Email" v-model="email" />
@@ -39,21 +39,11 @@ export default {
           console.log("OK");
         })
         .catch(error => this.errorMsg = error.message);
-    }
+    },
   }
 };
 </script>
 <style scoped>
-.view {
-  width: 25%;
-}
-
-.login-logo {
-  height: 80px;
-  width: auto;
-  margin: 1em;
-}
-
 .header {
   margin: 1em;
 }

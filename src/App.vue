@@ -56,12 +56,18 @@ export default {
   color: #fbff00;
 }
 
-.view {
+.view, .view-form {
   width: 90%;
   margin: auto;
   padding-top: 20px;
   padding-bottom: 100px;
   height: 100%;
+}
+
+.radio-logo {
+  height: 80px;
+  width: auto;
+  margin: 1em;
 }
 
 .station-icon {
@@ -77,6 +83,16 @@ export default {
 
 @media screen and (min-width: 900px) {
   .view {
+    width: 50%;
+  }
+
+  .view-form {
+    width: 25%;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+  .view-form {
     width: 50%;
   }
 }
