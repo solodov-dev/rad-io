@@ -53,7 +53,8 @@ const actions = {
         `https://www.radio-browser.info/webservice/json/stations/${search.by}/${search.term}`,
       )
       .then((res) => {
-        const dataList = Object.values(res.data);
+        const unfilteredList = Object.values(res.data);
+        const dataList = unfilteredList.filter(s => s.url.indexOf('https:') !== -1);
         // If there are more than 20 stations => choose 20 random stations
         if (dataList.length > 20) {
           for (let i = 0; i < 20; i += 1) {
@@ -87,6 +88,7 @@ const actions = {
         // Add radiostation icon (result doesn't include one)
         streamData.icon = station.icon;
         // Send station info to the stream and play
+        console.log(streamData.url);
         commit('updateStream', streamData);
         commit('play');
       })
