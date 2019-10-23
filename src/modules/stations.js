@@ -91,8 +91,12 @@ const actions = {
         `http://www.radio-browser.info/webservice/v2/json/url/${station.id}`,
       )
       .then((res) => {
-        res.data.icon = station.icon;
-        commit('updateStream', res.data);
+        // Destructure res to include only needed fields
+        const streamData = (({ id, name, url }) => ({ id, name, url }))(res.data);
+        // Add radiostation icon (result doesn't include one)
+        streamData.icon = station.icon;
+        // Send station info to the stream and play
+        commit('updateStream', streamData);
         commit('play');
       })
       .catch(error => console.log(error));
