@@ -53,8 +53,7 @@ const actions = {
         `https://www.radio-browser.info/webservice/json/stations/${search.by}/${search.term}`,
       )
       .then((res) => {
-        const unfilteredList = Object.values(res.data);
-        const dataList = unfilteredList.filter(s => s.url.indexOf('https:') !== -1);
+        const dataList = Object.values(res.data);
         // If there are more than 20 stations => choose 20 random stations
         if (dataList.length > 20) {
           for (let i = 0; i < 20; i += 1) {
